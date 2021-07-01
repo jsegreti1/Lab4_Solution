@@ -48,4 +48,22 @@ public class Dictionary {
 			return words.get(idx);
 	}
 
+	/**
+	 * match - Recursive method to find a match between a string and wildcard
+	 * characters ? and *
+	 * 
+	 * @author BRG
+	 * @version Lab #2
+	 * @since Lab #2
+	 * @param first  - String with wildcards
+	 * @param second - String without wildcards
+	 * @return
+	 */
+	private boolean match(String first, String second) {
+
+
+
+		return false;
+	}
+
 }
