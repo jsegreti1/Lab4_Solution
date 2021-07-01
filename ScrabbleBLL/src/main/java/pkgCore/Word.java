@@ -1,5 +1,6 @@
 package pkgCore;
 
+import java.util.Comparator;
 import java.util.UUID;
 
 public class Word implements Comparable<Word> {
@@ -7,19 +8,30 @@ public class Word implements Comparable<Word> {
 	private UUID WordID;
 	private String Word;
 
+	public Word(String strWord) {
+		WordID = UUID.randomUUID();
+		Word = strWord.toUpperCase();
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Complete the method. When does one word "equal" another? When the Word
-		// attribute matches.
-		return super.equals(obj);
+		Word w = (Word)obj;
+		return (w.getWord().equals(this.getWord()));
 	}
 
 	@Override
 	public int compareTo(Word o) {
-		// TODO: Complete the 'compareTo' method to sort words by this.Word
-		// alphabetically
-		return 0;
+		return this.getWord().compareTo(o.getWord());
 	}
+
+	public static Comparator<Word> CompWord = new Comparator<Word>() {
+		public int compare(Word o1, Word o2) {
+			if (o1.getWord().equals(o2.getWord())) {
+				return o1.getWord().compareTo(o2.getWord());
+			}
+			return o1.getWord().compareTo(o2.getWord());
+		}
+	};
 
 	public String getWord() {
 		return Word;
