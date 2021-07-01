@@ -76,5 +76,53 @@ public class DictionaryLab1Test {
 
 		System.out.println("---FindWord3 Complete---");
 	}
-
+	
+	@Test
+	public void TestEquals1()
+	{
+		System.out.println("---TestEquals1 Start---");
+		Word w1 = new Word("Yes");
+		Word w2 = new Word("Yes");
+		assertTrue(w1.equals(w2));
+		System.out.println("---TestEquals1 Complete---");
+	}
+	@Test
+	public void TestEquals2()
+	{
+		System.out.println("---TestEquals2 Start---");
+		Word w1 = new Word("Yes");
+		Word w2 = new Word("No");
+		assertFalse(w1.equals(w2));
+		System.out.println("---TestEquals2 Complete---");		
+	}	
+	@Test
+	public void TestCompare1()
+	{
+		System.out.println("---TestCompare1 Start---");
+		Word w1 = new Word("ABC");
+		Word w2 = new Word("A");
+		assertTrue(w1.compareTo(w2) > 0);
+		System.out.println("---TestCompare1 Complete---");		
+	}
+	
+	@Test
+	public void TestCompare2()
+	{
+		System.out.println("---TestCompare2 Start---");
+		Word w1 = new Word("ABC");
+		Word w2 = new Word("B");
+		assertTrue(w1.compareTo(w2) < 0);
+		System.out.println("---TestCompare2 Complete---");		
+	}
+	
+	@Test
+	public void TestCompare3()
+	{
+		System.out.println("---TestCompare3 Start---");
+		Word w1 = new Word("ABC");
+		Word w2 = new Word("ABC");
+		assertTrue(w1.compareTo(w2) == 0);
+		System.out.println("---TestCompare3 Complete---");		
+	}	
+	
 }
