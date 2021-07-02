@@ -1,6 +1,7 @@
 package pkgCore;
 
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Word implements Comparable<Word> {
@@ -13,6 +14,11 @@ public class Word implements Comparable<Word> {
 		Word = strWord.toUpperCase();
 	}
 	
+    @Override
+    public int hashCode()
+    {
+    	return Objects.hash(this.getWord());
+    }
 	@Override
 	public boolean equals(Object obj) {
 		Word w = (Word)obj;
