@@ -28,6 +28,14 @@ public class Dictionary {
 		return words;
 	}
 
+	/**
+	 * LoadDictionary - Load the dictionary, sort it after it's loaded
+	 * 
+	 * @author BRG
+	 * @version Lab #1
+	 * @since Lab #1
+	 */
+
 	private void LoadDictionary() {
 		InputStream is = getClass().getClassLoader().getResourceAsStream("util/words.txt");
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
@@ -46,10 +54,10 @@ public class Dictionary {
 	}
 
 	/**
-	 * GenerateWords - Public facing method.  If you call this with a string, it will 
-	 * return the permutations of words that could be generated.
-	 * There's no easy/direct way to do it- first you have to combin each string, then call permut 
-	 * to find the permutations for each combination. 
+	 * GenerateWords - Public facing method. If you call this with a string, it will
+	 * return the permutations of words that could be generated. There's no
+	 * easy/direct way to do it- first you have to combin each string, then call
+	 * permut to find the permutations for each combination.
 	 * 
 	 * @param strLetters
 	 * @return
@@ -67,12 +75,24 @@ public class Dictionary {
 				combinWords.add(strBuildWord);
 			}
 		}
-		HashSet<Word> hsUniqueWords = new HashSet<Word>(GeneratePossibleWords(combinWords));		
+
+		HashSet<Word> hsUniqueWords = new HashSet<Word>(GeneratePossibleWords(combinWords));
 		ArrayList<Word> WordsPermut = new ArrayList<Word>(hsUniqueWords);
 		Collections.sort(WordsPermut, Word.CompWord);
 		return WordsPermut;
 	}
-	
+
+	/**
+	 * GeneratePossibleWords - If you pass in an Array of Strings, it will call
+	 * GeneratePossibleWords(String) to determine the permutations of each string.
+	 * 
+	 * @author BRG
+	 * 
+	 * @version Lab #3
+	 * @since Lab #3
+	 * @param arrLetters
+	 * @return - unique list of Words.
+	 */
 	private ArrayList<Word> GeneratePossibleWords(ArrayList<String> arrLetters) {
 		HashSet<Word> words = new HashSet<Word>();
 
@@ -84,6 +104,17 @@ public class Dictionary {
 		return myWords;
 	}
 
+	/**
+	 * GeneratePossibleWords - this method will take an incoming String and
+	 * return a HashSet of all possible words.
+	 * 
+	 * @author BRG
+	 * 
+	 * @version Lab #3
+	 * @since Lab #3
+	 * @param strLetters
+	 * @return
+	 */
 	private HashSet<Word> GeneratePossibleWords(String strLetters) {
 		HashSet<Word> hsPossibleWords = new HashSet<Word>();
 		ArrayList<Character> arrLetters = new ArrayList<Character>();
@@ -99,12 +130,23 @@ public class Dictionary {
 				for (Character chrs : p) {
 					strBuild = strBuild + chrs;
 				}
-				hsPossibleWords.add(new Word(strBuild));							
+				hsPossibleWords.add(new Word(strBuild));
 			}
 		}
 		return hsPossibleWords;
 	}
-	
+
+	/**
+	 * 
+	 * findWord - Check to see if a given String is a word in the dictionary
+	 * 
+	 * @author BRG
+	 * 
+	 * @version Lab #1
+	 * @since Lab #1
+	 * @param strWord
+	 * @return - Return the Word from the dictionary.  If no word, return null.
+	 */
 	public Word findWord(String strWord) {
 
 		Word w = new Word(strWord);
@@ -163,7 +205,6 @@ public class Dictionary {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 
 		return false;
 	}
