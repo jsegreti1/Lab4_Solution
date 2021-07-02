@@ -6,7 +6,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.commons.math3.util.CombinatoricsUtils;
+
+import com.google.common.collect.Collections2;
 
 public class Dictionary {
 
@@ -37,6 +45,40 @@ public class Dictionary {
 		Collections.sort(words, Word.CompWord);
 	}
 
+	/**
+	 * GenerateWords - Public facing method.  If you call this with a string, it will 
+	 * return the permutations of words that could be generated.
+	 * There's no easy/direct way to do it- first you have to combin each string, then call permut 
+	 * to find the permutations for each combination. 
+	 * 
+	 * @param strLetters
+	 * @return
+	 */
+	public ArrayList<Word> GenerateWords(String strLetters) {
+		ArrayList<String> combinWords = new ArrayList<String>();
+		//TODO: Generate the combinations based on incoming strLetters
+		
+		//TODO: Take the combinations computed and call GeneratePossibleWords(ArrayList<String>)
+		
+		ArrayList<Word> WordsPermut = GeneratePossibleWords(combinWords);
+		//	Here's how you sort
+		Collections.sort(WordsPermut, Word.CompWord);
+		return WordsPermut;
+	}
+	
+	private ArrayList<Word> GeneratePossibleWords(ArrayList<String> arrLetters) {
+		HashSet<Word> words = new HashSet<Word>();
+		//TODO: Call GeneratePossibleWords(String) for each String in arrLetters
+		ArrayList<Word> arrWords = new ArrayList<Word>();
+		return arrWords;
+	}
+
+	private HashSet<Word> GeneratePossibleWords(String strLetters) {
+		HashSet<Word> hsPossibleWords = new HashSet<Word>();
+		//TODO: Insert the code that will generate the permutations
+		return hsPossibleWords;
+	}
+	
 	public Word findWord(String strWord) {
 
 		Word w = new Word(strWord);
