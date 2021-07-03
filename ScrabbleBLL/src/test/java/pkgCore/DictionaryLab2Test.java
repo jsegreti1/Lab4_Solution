@@ -147,7 +147,7 @@ public class DictionaryLab2Test {
 
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
 	}	
-	
+	@Test
 	public void TestMatch9()
 	{
 		Util.PrintStart(new Throwable().getStackTrace()[0].getMethodName());
@@ -159,6 +159,23 @@ public class DictionaryLab2Test {
 		
 		isMatch = this.match(d,str1,str2);
 		assertFalse(isMatch);
+		
+
+		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
+	}	
+	
+	@Test
+	public void TestMatch10()
+	{
+		Util.PrintStart(new Throwable().getStackTrace()[0].getMethodName());
+
+		String str1 = "J*VA";
+		String str2 = "JAVA";
+		boolean isMatch;
+		Dictionary d = new Dictionary();
+		
+		isMatch = this.match(d,str1,str2);
+		assertTrue(isMatch);
 		
 
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());

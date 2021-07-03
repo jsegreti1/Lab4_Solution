@@ -19,6 +19,7 @@ import com.google.common.collect.Collections2;
 public class Dictionary {
 
 	private ArrayList<Word> words = new ArrayList<Word>();
+	private ArrayList<Character> alphaBet = new ArrayList<Character>();
 
 	public Dictionary() {
 		LoadDictionary();
@@ -28,9 +29,15 @@ public class Dictionary {
 		return words;
 	}
 
+	private int iCntLoop = 0;
+
+	public int getiCntLoop() {
+		return iCntLoop;
+	}
+
 	/**
 	 * LoadDictionary - Load the dictionary, sort it after it's loaded
-	 * 
+	 * 					Also, load the alphabet
 	 * @author BRG
 	 * @version Lab #1
 	 * @since Lab #1
@@ -50,8 +57,71 @@ public class Dictionary {
 			e.printStackTrace();
 		}
 
+		for (int i = 65; i < 91; i++) {
+			alphaBet.add((char) i);
+		}
+		Collections.sort(alphaBet);
 		Collections.sort(words, Word.CompWord);
 	}
+
+
+	/**
+	 * findWords - This method will find all the possible words for a given String
+	 * 
+	 * DOG will produce DO, DOG, GO, GOD
+	 * 
+	 * @author BRG
+	 * @version Lab #4
+	 * @since Lab #4
+	 * @param strWord
+	 * @return
+	 */
+	public HashSet<Word> findWords(String strWord) {
+		HashSet<Word> FoundWords = new HashSet<Word>();
+		return FoundWords;
+	}
+	
+	/**
+	 * FindBeginningIndex - The intention of this method is to find the best place
+	 * in the dictionary to start searching. No sense in looking through the entire
+	 * dictionary. If you pass in a PartialWord, it will return the starting point
+	 * of the Dictionary, backing up a couple of positions for safety.
+	 * 
+	 * If ? or * is in the first position, you have to start with zero.
+	 * 
+	 * @author BRG
+	 * @version Lab #4
+	 * @since Lab #4
+	 * @param arrSearch
+	 * @param strPartialWord
+	 * @return
+	 */
+	private int FindBeginningIndex(ArrayList<Word> arrSearch, String strPartialWord) {
+		return 0;
+	}
+	/**
+	 * FindEndingIndex - The intention of this method is to find the best place in
+	 * the dictionary to end searching.
+	 * 
+	 * The method will find the last character in the string and advance it one
+	 * character, and then find the position in the dictionary If you pass in ABC,
+	 * it will find the position of ABD. If you pass in AB?, it will find the
+	 * position of ABZ. If you pass in AB*, it will find the position of ABZ.
+	 * 
+	 * It will add one index entry, just for safety and return the index to the
+	 * caller.
+	 * 
+	 * @author BRG
+	 * @version Lab #4
+	 * @since Lab #4
+	 * @param arrSearch
+	 * @param strPartialWord
+	 * @return
+	 */
+	private int FindEndingIndex(ArrayList<Word> arrSearch, String strPartialWord) {
+		return 0;
+	}
+ 
 
 	/**
 	 * GenerateWords - Public facing method. If you call this with a string, it will
@@ -62,6 +132,7 @@ public class Dictionary {
 	 * @param strLetters
 	 * @return
 	 */
+	
 	public ArrayList<Word> GenerateWords(String strLetters) {
 		ArrayList<String> combinWords = new ArrayList<String>();
 		for (int b = 1; b < strLetters.length() + 1; b++) {
@@ -105,8 +176,8 @@ public class Dictionary {
 	}
 
 	/**
-	 * GeneratePossibleWords - this method will take an incoming String and
-	 * return a HashSet of all possible words.
+	 * GeneratePossibleWords - this method will take an incoming String and return a
+	 * HashSet of all possible words.
 	 * 
 	 * @author BRG
 	 * 
@@ -145,7 +216,7 @@ public class Dictionary {
 	 * @version Lab #1
 	 * @since Lab #1
 	 * @param strWord
-	 * @return - Return the Word from the dictionary.  If no word, return null.
+	 * @return - Return the Word from the dictionary. If no word, return null.
 	 */
 	public Word findWord(String strWord) {
 
@@ -158,11 +229,45 @@ public class Dictionary {
 			return words.get(idx);
 	}
 
+//	private boolean match(String first, String second)
+//	{
+//		 
+//	    // If we reach at the end of both strings,
+//	    // we are done
+//	    if (first.length() == 0 && second.length() == 0)
+//	        return true;
+//	 
+//	    // Make sure that the characters after '*'
+//	    // are present in second string.
+//	    // This function assumes that the first
+//	    // string will not contain two consecutive '*'
+//	    if (first.length() > 1 && first.charAt(0) == '*' &&
+//	                              second.length() == 0)
+//	        return false;
+//	 
+//	    // If the first string contains '?',
+//	    // or current characters of both strings match
+//	    if ((first.length() > 1 && first.charAt(0) == '?') ||
+//	        (first.length() != 0 && second.length() != 0 &&
+//	         first.charAt(0) == second.charAt(0)))
+//	        return match(first.substring(1),
+//	                     second.substring(1));
+//	 
+//	    // If there is *, then there are two possibilities
+//	    // a) We consider current character of second string
+//	    // b) We ignore current character of second string.
+//	    if (first.length() > 0 && first.charAt(0) == '*')
+//	        return match(first.substring(1), second) ||
+//	               match(first, second.substring(1));
+//	    return false;
+//	}
+
 	/**
 	 * match - Recursive method to find a match between a string and wildcard
 	 * characters ? and *
 	 * 
 	 * @author BRG
+	 * https://www.geeksforgeeks.org/wildcard-character-matching/
 	 * @version Lab #2
 	 * @since Lab #2
 	 * @param first  - String with wildcards
@@ -173,7 +278,12 @@ public class Dictionary {
 		try {
 
 			if (second.isEmpty() || second.isBlank())
-				return true;
+				if (first.isEmpty() || first.isBlank())
+					return true;
+
+			if (second.isEmpty() || second.isBlank())
+				if (!first.isEmpty() || !first.isBlank())
+					return false;
 
 			// If we reach at the end of both strings,
 			// we are done
@@ -184,8 +294,11 @@ public class Dictionary {
 			// are present in second string.
 			// This function assumes that the first
 			// string will not contain two consecutive '*'
-			if (first.length() > 1 && first.charAt(0) == '*' && second.length() == 0)
-				return false;
+			if (first.length() == 1 && first.charAt(0) == '*')
+				if (second.length() == 0)
+					return false;
+				else
+					return true;
 
 			// If the first string contains '?',
 			// or current characters of both strings match
