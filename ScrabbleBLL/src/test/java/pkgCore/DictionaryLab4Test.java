@@ -26,6 +26,10 @@ public class DictionaryLab4Test {
 		  sb.append(w.getWord());
 		}
 		System.out.println(sb.toString());
+		
+		
+		assertEquals(words.size(), 1);
+		
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
 	}
 
@@ -44,6 +48,8 @@ public class DictionaryLab4Test {
 		  sb.append(w.getWord());
 		}
 		System.out.println(sb.toString());		
+
+		assertEquals(words.size(), 1);
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
 	}
 	
@@ -61,7 +67,8 @@ public class DictionaryLab4Test {
 		  prefix = ", ";
 		  sb.append(w.getWord());
 		}
-		System.out.println(sb.toString());		
+		System.out.println(sb.toString());	
+		assertEquals(words.size(), 19);
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
 	}
 	
@@ -79,7 +86,8 @@ public class DictionaryLab4Test {
 		  prefix = ", ";
 		  sb.append(w.getWord());
 		}
-		System.out.println(sb.toString());		
+		System.out.println(sb.toString());	
+		assertEquals(words.size(), 1);
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
 	}	
 	@Test
@@ -96,7 +104,8 @@ public class DictionaryLab4Test {
 		  prefix = ", ";
 		  sb.append(w.getWord());
 		}
-		System.out.println(sb.toString());		
+		System.out.println(sb.toString());
+		assertEquals(words.size(), 2);
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
 	}		
 	@Test
@@ -113,7 +122,8 @@ public class DictionaryLab4Test {
 		  prefix = ", ";
 		  sb.append(w.getWord());
 		}
-		System.out.println(sb.toString());		
+		System.out.println(sb.toString());	
+		assertEquals(words.size(), 28);
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
 	}	
 	
@@ -131,7 +141,8 @@ public class DictionaryLab4Test {
 		  prefix = ", ";
 		  sb.append(w.getWord());
 		}
-		System.out.println(sb.toString());		
+		System.out.println(sb.toString());	
+		assertEquals(words.size(), 24);
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
 	}		
 }
