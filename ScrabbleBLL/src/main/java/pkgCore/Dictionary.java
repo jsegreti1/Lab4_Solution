@@ -83,6 +83,15 @@ public class Dictionary {
 	
 	public HashSet<Word> findWords(String strWord) {
 		HashSet<Word> FoundWords = new HashSet<Word>();
+		begIndx=FindBeginningIndex(this.words,strWord);
+		endIndx=FindEndingIndex(this.words,strWord);
+		for (int i=begIndx; i<endIndx; i++) {
+			if (match(strWord, words.get(i).getWord())) {
+				FoundWords.add(words.get(i));
+			}
+		}
+		
+		
 		return FoundWords;
 	}
 	
