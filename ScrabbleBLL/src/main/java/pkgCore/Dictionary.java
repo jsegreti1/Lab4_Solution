@@ -83,6 +83,13 @@ public class Dictionary {
 	
 	public HashSet<Word> findWords(String strWord) {
 		HashSet<Word> FoundWords = new HashSet<Word>();
+		int begIndx = FindBeginningIndex(this.getWords(),strWord);
+		int endIndx = FindEndingIndex(this.getWords(),strWord);
+		for (int i = begIndx; i<endIndx; i++) {
+			if (match(strWord, this.getWords().toString())) {
+				FoundWords.add(this.words.get(i));
+			}
+		}
 		return FoundWords;
 	}
 	
@@ -132,7 +139,23 @@ public class Dictionary {
 	//TODO: Find the beginning index..  Where in arrSearch should I end for strPartialWord?
 
 	private int FindEndingIndex(ArrayList<Word> arrSearch, String strPartialWord) {
-		return 0;
+
+		if (strPartialWord.substring(strPartialWord.length()-1)=="*"||strPartialWord.substring(strPartialWord.length()-1)=="?"||strPartialWord.substring(strPartialWord.length()-1)=="z") {
+			String strPartialWordR= strPartialWord.substring(0,strPartialWord.length()-1);
+			return FindEndingIndex(arrSearch, strPartialWordR);
+		}else if (strPartialWord.indexOf("?")!=-1){
+			String strPartialWordR= strPartialWord.substring(0,strPartialWord.indexOf("?"));
+			return FindEndingIndex(arrSearch, strPartialWordR);
+		}else if (strPartialWord.indexOf("?")==-1 && strPartialWord.length()!=0) {
+			char [] charPartialWord= strPartialWord.toCharArray();
+			charPartialWord[charPartialWord.length-1]=charPartialWord[charPartialWord.length-1]++;
+			String strProceedPartialWord= charPartialWord.toString();
+			Word proceedPartialWord = new Word(strProceedPartialWord);
+			return Math.abs(Collections.binarySearch(this.words, proceedPartialWord, Word.CompWord));	
+		}else{
+			return arrSearch.size()-1;
+		}
+			
 	}
  
 
