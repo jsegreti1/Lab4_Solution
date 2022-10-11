@@ -112,9 +112,19 @@ public class Dictionary {
 	//TODO: Find the beginning index..  Where in arrSearch should I begin for strPartialWord?
 	
 	private int FindBeginningIndex(ArrayList<Word> arrSearch, String strPartialWord) {
-		return 0;
-	
-	
+		if (strPartialWord.substring(0) != "?" || strPartialWord.substring(0)!= "*") { 
+			if (strPartialWord.substring(1) != "?" || strPartialWord.substring(1) != "*") { 
+				Word preceedPartialWord = new Word(strPartialWord.substring(0, 1));
+				return Math.abs(Collections.binarySearch(this.words, preceedPartialWord));
+			}
+			else if (strPartialWord.substring(1) == "?" || strPartialWord.substring(1) == "*") { 
+				Word preceedPartialWord = new Word(strPartialWord.substring(0));
+				return Math.abs(Collections.binarySearch(this.words, preceedPartialWord));
+			}
+		}
+		else { 
+			return 0; 
+		}
 	}
 	/**
 	 * FindEndingIndex - The intention of this method is to find the best place in
