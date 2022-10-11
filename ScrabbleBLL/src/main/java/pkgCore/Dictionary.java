@@ -83,15 +83,6 @@ public class Dictionary {
 	
 	public HashSet<Word> findWords(String strWord) {
 		HashSet<Word> FoundWords = new HashSet<Word>();
-		begIndx=FindBeginningIndex(this.words,strWord);
-		endIndx=FindEndingIndex(this.words,strWord);
-		for (int i=begIndx; i<endIndx; i++) {
-			if (match(strWord, words.get(i).getWord())) {
-				FoundWords.add(words.get(i));
-			}
-		}
-		
-		
 		return FoundWords;
 	}
 	
@@ -115,6 +106,8 @@ public class Dictionary {
 	
 	private int FindBeginningIndex(ArrayList<Word> arrSearch, String strPartialWord) {
 		return 0;
+	
+	
 	}
 	/**
 	 * FindEndingIndex - The intention of this method is to find the best place in
