@@ -112,18 +112,18 @@ public class Dictionary {
 	//TODO: Find the beginning index..  Where in arrSearch should I begin for strPartialWord?
 	
 	private int FindBeginningIndex(ArrayList<Word> arrSearch, String strPartialWord) {
-		if (strPartialWord.substring(0) != "?" || strPartialWord.substring(0)!= "*") { 
+		if (strPartialWord.substring(0) != "?"|| strPartialWord.substring(0)!= "*") { 
 			if (strPartialWord.substring(1) != "?" || strPartialWord.substring(1) != "*") { 
-				Word preceedPartialWord = new Word(strPartialWord.substring(0, 1));
+				Word preceedPartialWord = new Word(strPartialWord.substring(0,1));
 				return Math.abs(Collections.binarySearch(this.words, preceedPartialWord));
 			}
-			else if (strPartialWord.substring(1) == "?" || strPartialWord.substring(1) == "*") { 
+			else { 
 				Word preceedPartialWord = new Word(strPartialWord.substring(0));
 				return Math.abs(Collections.binarySearch(this.words, preceedPartialWord));
 			}
 		}
 		else { 
-			return 0; 
+			return 0;
 		}
 	}
 	/**
