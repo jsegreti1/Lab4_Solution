@@ -68,7 +68,7 @@ public class DictionaryLab4Test {
 		  sb.append(w.getWord());
 		}
 		System.out.println(sb.toString());	
-		assertEquals(words.size(), 19);
+		assertEquals(words.size(), 20);
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
 	}
 	

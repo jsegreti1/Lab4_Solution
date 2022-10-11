@@ -85,8 +85,8 @@ public class Dictionary {
 		HashSet<Word> FoundWords = new HashSet<Word>();
 		int begIndx = FindBeginningIndex(this.getWords(),strWord);
 		int endIndx = FindEndingIndex(this.getWords(),strWord);
-		for (int i = begIndx; i<endIndx; i++) {
-			if (match(strWord, this.getWords().toString())) {
+		for (int i = begIndx-1; i<endIndx; i++) {
+			if (match(strWord, this.words.get(i).getWord())) {
 				FoundWords.add(this.words.get(i));
 			}
 		}
@@ -112,20 +112,27 @@ public class Dictionary {
 	//TODO: Find the beginning index..  Where in arrSearch should I begin for strPartialWord?
 	
 	private int FindBeginningIndex(ArrayList<Word> arrSearch, String strPartialWord) {
-		if (strPartialWord.substring(0) != "?"|| strPartialWord.substring(0)!= "*") { 
-			if (strPartialWord.substring(1) != "?" || strPartialWord.substring(1) != "*") { 
-				Word preceedPartialWord = new Word(strPartialWord.substring(0,1));
-				return Math.abs(Collections.binarySearch(this.words, preceedPartialWord));
-			}
-			else { 
-				Word preceedPartialWord = new Word(strPartialWord.substring(0));
-				return Math.abs(Collections.binarySearch(this.words, preceedPartialWord));
-			}
-		}
-		else { 
-			return 0;
-		}
-	}
+        int strPartialWordIndex;
+        String strPartialWord1=strPartialWord;
+        
+        if (strPartialWord.indexOf("?") == 0 || strPartialWord.indexOf("*") == 0) {
+           return 0;
+        }
+        if (strPartialWord.contains("?")) {
+            strPartialWordIndex = strPartialWord.indexOf("?");
+            strPartialWord1 = strPartialWord.substring(0, strPartialWordIndex);
+            
+            
+        }
+        if (strPartialWord1.contains("*")) {
+            strPartialWordIndex = strPartialWord.indexOf("*");
+            strPartialWord1 = strPartialWord.substring(0, strPartialWordIndex);
+            
+            
+        }
+        Word partialWord1 = new Word(strPartialWord1);
+        return Math.abs(Collections.binarySearch(this.words, partialWord1, Word.CompWord)) - 5;
+    }
 	/**
 	 * FindEndingIndex - The intention of this method is to find the best place in
 	 * the dictionary to end searching.
@@ -150,7 +157,7 @@ public class Dictionary {
 
 	private int FindEndingIndex(ArrayList<Word> arrSearch, String strPartialWord) {
 
-		if (strPartialWord.substring(strPartialWord.length()-1)=="*"||strPartialWord.substring(strPartialWord.length()-1)=="?"||strPartialWord.substring(strPartialWord.length()-1)=="z") {
+		if (strPartialWord.charAt(strPartialWord.length()-1)=='*'||strPartialWord.charAt(strPartialWord.length()-1)=='?'||strPartialWord.charAt(strPartialWord.length()-1)=='z') {
 			String strPartialWordR= strPartialWord.substring(0,strPartialWord.length()-1);
 			return FindEndingIndex(arrSearch, strPartialWordR);
 		}else if (strPartialWord.indexOf("?")!=-1){
@@ -158,16 +165,28 @@ public class Dictionary {
 			return FindEndingIndex(arrSearch, strPartialWordR);
 		}else if (strPartialWord.indexOf("?")==-1 && strPartialWord.length()!=0) {
 			char [] charPartialWord= strPartialWord.toCharArray();
-			charPartialWord[charPartialWord.length-1]=charPartialWord[charPartialWord.length-1]++;
-			String strProceedPartialWord= charPartialWord.toString();
+			charPartialWord[charPartialWord.length-1]++;
+			String strProceedPartialWord= new String(charPartialWord);
 			Word proceedPartialWord = new Word(strProceedPartialWord);
-			return Math.abs(Collections.binarySearch(this.words, proceedPartialWord, Word.CompWord));	
+			return Math.abs(Collections.binarySearch(this.words, proceedPartialWord))+1;	
 		}else{
 			return arrSearch.size()-1;
 		}
 			
 	}
  
+
+	/**
+	 * GenerateWords - Public facing method. If you call this with a string, it will
+	 * return the permutations of words that could be generated. There's no
+	 * easy/direct way to do it- first you have to combin each string, then call
+	 * permut to find the permutations for each combination.
+	 * 
+	 * @param strLetters
+	 * @return
+	 */
+	
+
 
 	/**
 	 * GenerateWords - Public facing method. If you call this with a string, it will
